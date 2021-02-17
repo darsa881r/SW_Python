@@ -7,7 +7,7 @@ import numpy as np
 
 # groupvar, xvar, yvar,
 
-def disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, dataset01, dataset02, save_location):
+def disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, dataset, save_location):
     # Edit the font, font size, and axes width
     mpl.rcParams['font.family'] = 'Times New Roman'
     plt.rcParams['font.size'] = 24
@@ -57,12 +57,9 @@ def disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name,
 
 
     # Creating the groups for legend
-    groups = dataset01.groupby(groupvar)
+    groups = dataset.groupby(groupvar)
     for l, grp in groups:
-        ax.plot(grp[xvar], grp[yvar],'k+',label = l)
-    groups2 = dataset02.groupby(groupvar)
-    for l, grp in groups2:
-        ax.plot(grp[xvar], grp[yvar],'ko',label = l)
+        ax.plot(grp[xvar], grp[yvar],'o',label = l)
 
     # Enabling legends
     #ax.legend(loc='lower right', frameon=True)
@@ -75,7 +72,6 @@ def disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name,
 
     plt.show()
 
-
     return ax.plot
 
 
@@ -83,7 +79,7 @@ def func(x, a, b):
     # return a * np.exp(b * x)
     return a * x + b
 
-def disp_figure_fit(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, dataset01, dataset02, xFit, ppars1, ppars2, save_location):
+def disp_figure_fit(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, dataset, xFit, ppars1, ppars2, save_location):
     # Edit the font, font size, and axes width
     mpl.rcParams['font.family'] = 'Times New Roman'
     plt.rcParams['font.size'] = 24
@@ -133,12 +129,9 @@ def disp_figure_fit(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_nam
 
 
     # Creating the groups for legend
-    groups = dataset01.groupby(groupvar)
+    groups = dataset.groupby(groupvar)
     for l, grp in groups:
-        ax.plot(grp[xvar], grp[yvar],'k+',label = l)
-    groups2 = dataset02.groupby(groupvar)
-    for l, grp in groups2:
-        ax.plot(grp[xvar], grp[yvar],'ko',label = l)
+        ax.plot(grp[xvar], grp[yvar],'0',label = l)
 
     plt.plot(xFit, func(xFit, *ppars1), 'r--', label = 'fitted: a=%3.2f, b=%5.2f'% tuple(ppars1))
     plt.plot(xFit, func(xFit, *ppars2), 'r--', label = 'fitted: a=%3.2f, b=%5.2f'% tuple(ppars2))
@@ -165,37 +158,40 @@ def disp_figure_fit(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_nam
 if __name__ == "__main__":
     import numpy as np
     import pandas as pd 
-    
-    file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\single.csv' 
-    data_single = pd.read_csv(file_name)
-    file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\utube.csv' 
-    data_utube = pd.read_csv(file_name)
+    import expdataproc as eprc 
 
-    print("Done")
+    file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl_James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\single.csv' 
+    data_single = pd.read_csv(file_name)
+    data_single = eprc.proc_single(data_single)
+
+    #file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl_James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\utube.csv' 
+    #data_utube = pd.read_csv(file_name)
+
+    print("Done1")
 
     xscale_label = "linear"
     yscale_label = "linear"
 
-    print("Done")
+    print("Done2")
     
     groupvar = "fluids"
     xvar = "We_lc"
-    yvar = "S_d"
+    yvar = "S_D"
 
-    print("Done")
+    print("Done3")
 
     xlabel_name = "$\mathregular{We_{l_c}^{1/5}}$"
     ylabel_name = "$\mathregular{S/d}$"
 
-    print("Done")
+    print("Done4")
 
-    save_location = "C:\\Users\\sabbi\\Dropbox\\Darryl James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\output\\S_dvsWe.png"
+    save_location = "C:\\Users\\sabbi\\Dropbox\\Darryl_James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\output\\S_dvsWe.png"
 
-    print("Done")
+    print("Done5")
 
-    disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, data_single, data_utube, save_location)
+    disp_figure01(xscale_label, yscale_label, groupvar, xvar, yvar, xlabel_name, ylabel_name, data_single, save_location)
 
-    print("Done")
+    print("Done6")
 
 
 

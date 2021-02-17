@@ -1,5 +1,4 @@
 import os
-import numpy as np
 import pandas as pd 
 
 def disp_files_folder(folder_path):
@@ -15,10 +14,11 @@ def load_csv(file_name):
         return df
 
 if __name__ == "__main__":
-    folder_path = 'C:\\Users\\sabbi\\Dropbox\\Darryl James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input' 
+    folder_path = 'C:\\Users\\sabbi\\Dropbox\\Darryl_James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input' 
     disp_files_folder(folder_path)
-    file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\single.csv' 
+    file_name = 'C:\\Users\\sabbi\\Dropbox\\Darryl_James\\Mendeley_library\\JetEntrainment\\Selective\\Qualifying_docs\\SW_Python\\input\\single.csv' 
     data_single = load_csv(file_name)
+    print(data_single.head(5))
 
   
 
